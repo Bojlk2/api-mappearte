@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
     user: {
         type: String,
-        minlength: 5,
+        minlength: 2,
         maxlength: 20,
         required: true
     },
@@ -18,13 +18,13 @@ const userSchema = new mongoose.Schema({
     },
     name: {
         type: String,
-        minlength: 3,
+        minlength: 2,
         maxlength: 20,
         required: true
     },
     lastName: {
         type: String,
-        minlength: 3,
+        minlength: 2,
         maxlength: 40,
         required: false
     },

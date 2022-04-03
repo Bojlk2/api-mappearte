@@ -1,16 +1,6 @@
 const bcrypt = require('bcrypt')
 const createError = require('http-errors')
-const jwt = require('../lib/jwt.lib')
 const User = require('../models/user.model')
-
-async function login(email, password) {
-    const userFound = await User.findOne({email})
-    if(!userFound) throw new createError(401, 'Datos inválidos')
-    const isValidPassword = await bcrypt.compare(password, User.password)
-    if(!isValidPassword) throw new createError(401, 'Datos inválidos')
-
-    return jwt.signIn({ id: userFound._id})
-}
 
 async function create (userData) {
     const userFound = await User.findOne({email:userData.email})
@@ -38,7 +28,6 @@ function update(id, newUserData) {
 }
 
 module.exports = {
-    login,
     create,
     getAll,
     getByID,

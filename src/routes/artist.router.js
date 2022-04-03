@@ -4,7 +4,7 @@ const artists = require('../usecases/artist.usecase')
 const router = express.Router()
 const auth = require('../middlewares/auth.middleware')
 
-router.use(auth)
+// router.use(auth)
 
 router.get('/', async (request, response) => {
     try {
