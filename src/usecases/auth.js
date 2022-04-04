@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 
 
 async function login(email, password) {
+    try {
         let role = 'user'
         let findEmail = await User.findOne({email})
         
@@ -13,7 +14,8 @@ async function login(email, password) {
             role = 'artist'
             findEmail = await Artist.findOne({email})
             
-        }else if(!findEmail) {
+        }
+        else if(!findEmail) {
             throw new createError(401, 'Credenciales Incorrectas')
         }
 
@@ -21,6 +23,10 @@ async function login(email, password) {
         if(!isValidPassword) throw new createError(401, 'Datos Inválidos')
 
         return jwt.signIn({ id: findEmail._id, role})
+        
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 module.exports = login
