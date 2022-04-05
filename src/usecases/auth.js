@@ -3,6 +3,7 @@ const Artist = require('../models/artist.model')
 const User = require('../models/user.model')
 const jwt = require('../lib/jwt.lib')
 const bcrypt = require('bcrypt')
+const { response } = require('express')
 
 
 async function login(email, password) {
@@ -25,7 +26,9 @@ async function login(email, password) {
         return jwt.signIn({ id: findEmail._id, role})
         
     } catch (error) {
-        console.error(error)
+        response.json({
+            ok: false        
+        })
     }
 }
 
