@@ -1,6 +1,6 @@
 const express = require('express')
 const createError = require('http-errors')
-const users = require('../usecases/user.usecase')
+const users = require('../usecases/user')
 const router = express.Router()
 const auth = require('../middlewares/auth.middleware')
 

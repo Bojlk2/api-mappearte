@@ -1,7 +1,7 @@
 const createError = require('http-errors')
-const Artist = require('../models/artist.model')
-const User = require('../models/user.model')
-const jwt = require('../lib/jwt.lib')
+const Artist = require('../models/artist')
+const User = require('../models/user')
+const jwt = require('../lib/jwt')
 const bcrypt = require('bcrypt')
 const { response } = require('express')
 
