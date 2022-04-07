@@ -1,9 +1,12 @@
 const createError = require('http-errors')
 const Artist = require('../models/artist')
 const User = require('../models/user')
+const Token = require('../models/token')
 const jwt = require('../lib/jwt')
 const bcrypt = require('bcrypt')
-const { response } = require('express')
+const crypto = require('crypto')
+const sendEmail = require('../utils/email/sendEmail')
+const { find } = require('../models/user')
 
 
 async function login(email, password) {
@@ -32,4 +35,86 @@ async function login(email, password) {
     }
 }
 
-module.exports = login
+async function requestResetPassword (email) {
+    try {
+        let findEmail = await User.findOne({email})
+        if(!findEmail) {
+            findEmail = await Artist.findOne({email})
+        } else if(!findEmail) {
+            throw new createError('¡El Email no existe!')
+        }
+
+        let token = await Token.findOne({id: findEmail._id})
+        if(token) await token.deleteOne()
+
+        let resetToken = crypto.randomBytes(32).toString('hex')
+        const hash = await bcrypt.hash(resetToken, 15)
+
+        await new Token({
+            id: findEmail._id,
+            token: hash,
+            createdAt: Date.now()
+        }).save()
+
+        let link = `http://localhost:8080/passwordReset?token=${resetToken}&id=${findEmail._id}`
+
+        sendEmail(
+            findEmail.email,
+            "Reestablecimiento de contraseña",
+            {
+                name: findEmail.name,
+                link
+            },
+            '../utils/email/template/resetPAssword.handlebars'
+        )
+        return link
+        
+
+
+    } catch (error) {
+        
+    }
+}
+
+async function resetPassword (id, token, password) {
+    try {
+        
+        let passwordResetToken = await Token.findOne({id})
+        if(!passwordResetToken) throw new createError('No válido o token expirado')
+    
+        const isValid = await bcrypt.compare(token, passwordResetToken.token)
+        if(!isValid) throw new createError('No válido o token expirado')
+    
+        const hash = await bcrypt.hash(password, 15)
+        await User.updateOne(
+            {_id: id},
+            {$set: { password: hash}},
+            {new: true}
+        )
+    
+        const user = await User.findById({_id: id})
+        sendEmail(
+            findEmail.email,
+            'Password reestablecido exitosamente',
+            {
+                name: findEmail.name,
+           },
+           '../utils/email/template/changePassword.handlebars'
+        )
+    
+        await passwordResetToken.deleteOne()
+    
+        return true
+    } catch (error) {
+        
+    }
+
+}
+
+
+
+module.exports = {
+    login,
+    requestResetPassword,
+    resetPassword
+}

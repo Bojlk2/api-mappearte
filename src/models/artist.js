@@ -33,6 +33,7 @@ const artistSchema = new mongoose.Schema({
         match: /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/,
         minlength: 8,
         maxlength: 30,
+        unique: true,
         required: true
     },
     password: {
