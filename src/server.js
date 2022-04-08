@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 
-const artistRouter = require('./routes/artist.router')
-const authRouter = require('./routes/auth.router')
-const userRouter = require('./routes/user.router')
+const artistRouter = require('./routes/artist')
+const authRouter = require('./routes/auth')
+const userRouter = require('./routes/user')
 
 const app = express()
 

@@ -6,7 +6,7 @@ const jwt = require('../lib/jwt')
 const bcrypt = require('bcrypt')
 const crypto = require('crypto')
 const sendEmail = require('../utils/email/sendEmail')
-const { find } = require('../models/user')
+
 
 
 async function login(email, password) {
@@ -91,13 +91,13 @@ async function resetPassword (id, token, password) {
             {$set: { password: hash}},
             {new: true}
         )
-    
+    // Me falta saber como traer la informacion de la base de datos de artistas
         const user = await User.findById({_id: id})
         sendEmail(
-            findEmail.email,
+            user.email,
             'Password reestablecido exitosamente',
             {
-                name: findEmail.name,
+                name: user.name,
            },
            '../utils/email/template/changePassword.handlebars'
         )
@@ -106,7 +106,11 @@ async function resetPassword (id, token, password) {
     
         return true
     } catch (error) {
-        
+        response.status(error.status || 500)
+        response.json({
+            ok: false,
+            message: error.message
+        })
     }
 
 }

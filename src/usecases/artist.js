@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const createError = require('http-errors')
-const Artist = require('../models/artist.model')
+const Artist = require('../models/artist')
 
 async function create (artistData) {
     const artistFound = await Artist.findOne({email: artistData.email})

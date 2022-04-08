@@ -2,7 +2,7 @@ const express = require('express')
 const createError = require('http-errors')
 const artists = require('../usecases/artist')
 const router = express.Router()
-const auth = require('../middlewares/auth.middleware')
+const auth = require('../middlewares/auth')
 
 // router.use(auth)
 
