@@ -1,6 +1,6 @@
 const express = require('express')
 const createError = require('http-errors')
-const {login, requestResetPassword, resetPassword} = require('../usecases/auth')
+const login = require('../usecases/auth')
 const router = express.Router()
 
 router.post('/login', async(request, response) => {
@@ -26,8 +26,5 @@ router.post('/login', async(request, response) => {
         })
     }
 })
-
-router.post('/requestResetPassword', requestResetPassword)
-router.post('/resetPassword', resetPassword)
 
 module.exports = router

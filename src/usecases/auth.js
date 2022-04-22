@@ -63,7 +63,7 @@ async function requestResetPassword (email) {
             "Reestablecimiento de contraseña",
             {
                 name: findEmail.name,
-                link
+                link: link
             },
             '../utils/email/template/resetPAssword.handlebars'
         )

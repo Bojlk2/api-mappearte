@@ -24,7 +24,7 @@ function deleteById(id) {
 }
 
 function update(id, newArtistData) {
-    return User.findByIdAndUpdate(id, newArtistData)
+    return Artist.findByIdAndUpdate(id, newArtistData)
 }
 
 module.exports = {
