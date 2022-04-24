@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         minlength: 2,
         maxlength: 20,
-        required: true
+        required: true,
+        unique: true
     },
     isMural: {
         type: Boolean
