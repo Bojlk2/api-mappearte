@@ -8,7 +8,12 @@ function getAll() {
     return Mural.find()
 }
 
+function getByID(id) {
+    return Mural.findById(id)
+}
+
 module.exports = {
     create,
-    getAll
+    getAll,
+    getByID
 }

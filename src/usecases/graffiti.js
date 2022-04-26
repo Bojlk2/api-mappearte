@@ -8,7 +8,12 @@ function getAll() {
     return Graffiti.find()
 }
 
+function getByID (id) {
+    return Graffiti.findById(id)
+}
+
 module.exports = {
     create,
-    getAll
+    getAll,
+    getByID
 }

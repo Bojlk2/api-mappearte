@@ -8,7 +8,12 @@ function getAll() {
     return Sticker.find()
 }
 
+function getByID (id) {
+    return Sticker.findById(id)
+}
+
 module.exports = {
     create,
-    getAll
+    getAll,
+    getByID
 }

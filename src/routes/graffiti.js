@@ -22,9 +22,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-      const graffitiFound = await graffitis.getByID(request.params.id)
+      const graffitiFound = await graffitis.getByID(req.params.id)
       if(!graffitiFound) throw new createError(404, 'Graffiti no encontrado')
-      response.json({
+      res.json({
           ok: true,
           graffitis: graffitiFound
       })

@@ -21,9 +21,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const stickerFound = await stickers.getByID(request.params.id)
+        const stickerFound = await stickers.getByID(req.params.id)
         if(!stickerFound) throw new createError(404, 'Sticker no encontrado')
-        response.json({
+        res.json({
             ok: true,
             stickers: stickerFound
         })

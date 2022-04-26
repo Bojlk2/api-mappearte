@@ -22,9 +22,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const muralFound = await murals.getByID(request.params.id)
+        const muralFound = await murals.getByID(req.params.id)
         if(!muralFound) throw new createError(404, 'Mural no encontrado')
-        response.json({
+        res.json({
             ok: true,
             murals: muralFound
         })
