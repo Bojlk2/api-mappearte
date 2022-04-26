@@ -25,4 +25,4 @@ const stickerSchema = new mongoose.Schema({
     }
 })
 
-module.exports = (mongoose.Schema('sticker', stickerSchema))
+module.exports = (mongoose.model('sticker', stickerSchema))

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const stickers = require('../models/sticker')
+const stickers = require('../usecases/sticker')
 const auth = ('../middlewares/auth.js')
 
 router.get('/', async (req, res) => {
@@ -19,7 +19,24 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
+    try {
+        const stickerFound = await stickers.getByID(request.params.id)
+        if(!stickerFound) throw new createError(404, 'Sticker no encontrado')
+        response.json({
+            ok: true,
+            stickers: stickerFound
+        })
+    } catch (error) {
+        res.status(error.status || 500)
+        res.json({
+            ok: false,
+            message: error.message
+        })
+    }
+})
+
+router.get('/:artistId', async (req, res) => {
     try {
       res.send({artistId: req.query._id})
     } catch (error) {
@@ -48,3 +65,5 @@ router.post('/', async (req, res) => {
         })
     }
 })
+
+module.exports = router

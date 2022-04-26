@@ -25,4 +25,4 @@ const graffitiSchema = new mongoose.Schema({
     }
 })
 
-module.exports = (mongoose.Schema('graffiti', graffitiSchema))
+module.exports = (mongoose.model('graffiti', graffitiSchema))

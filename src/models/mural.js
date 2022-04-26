@@ -1,17 +1,21 @@
 const mongoose = require('mongoose')
 
 const muralSchema = new mongoose.Schema({
-    location: {
-        type: [String],
-        require: true
+    lat: {
+        type: String,
+        required: true
+    },
+    lng: {
+        type: String,
+        required: true
     },
     address:{
         type: String,
-        require: true
+        required: true
     },
     muralImg: {
         type: String,
-        require: true
+        required: true
     },
     uploadDate: {
         type: Date,
@@ -25,4 +29,4 @@ const muralSchema = new mongoose.Schema({
     }
 })
 
-module.exports = (mongoose.Schema('mural', muralSchema))
+module.exports = (mongoose.model('mural', muralSchema))
