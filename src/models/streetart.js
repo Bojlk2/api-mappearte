@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
-const muralSchema = new mongoose.Schema({
+const streetartSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        enum: ['sticker', 'mural', 'graffiti'],
+        required: true
+    },
     lat: {
         type: String,
         required: true
@@ -22,11 +27,12 @@ const muralSchema = new mongoose.Schema({
         required: true
     },
     artistId: {
-        type: [{}]
+        type: [mongoose.Types.ObjectId],
+        ref: 'artist'
     },
     activeMap: {
         type: Boolean
     }
 })
 
-module.exports = (mongoose.model('mural', muralSchema))
+module.exports = (mongoose.model('streetart', streetartSchema))
