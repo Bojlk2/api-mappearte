@@ -57,7 +57,7 @@ router.post('/', async(request, response) => {
     }
 })
 
-router.patch('/:id', async (response, request) => {
+router.patch('/:id', async (request, response) => {
     try {
         const artistUpdate = await artists.update((request.params.id), (request.body))
         if(!artistUpdate) throw new createError(404, 'Artista no encontrado')
@@ -75,7 +75,7 @@ router.patch('/:id', async (response, request) => {
     }
  })
 
- router.delete('/:id', async (response, request) => {
+ router.delete('/:id', async (request, response) => {
      try {
          const artistDeleted = await artists.deleteById(request.params.id)
          if(!artistDeleted) throw new createError(404, 'Artista no encontrado')

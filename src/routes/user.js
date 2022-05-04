@@ -57,7 +57,7 @@ router.post('/', async(request, response) => {
     }
 })
 
-router.patch('/:id', auth, async (response, request) => {
+router.patch('/:id', auth, async (request, response) => {
     try {
         const userUpdate = await users.update((request.params.id), (request.body))
         if(!userUpdate) throw new createError(404, 'Usuario no encontrado')
@@ -75,7 +75,7 @@ router.patch('/:id', auth, async (response, request) => {
     }
  })
 
- router.delete('/:id', auth, async (response, request) => {
+ router.delete('/:id', auth, async (request, response) => {
      try {
          const userDeleted = await users.deleteById(request.params.id)
          if(!userDeleted) throw new createError(404, 'Usuario no encontrado')
