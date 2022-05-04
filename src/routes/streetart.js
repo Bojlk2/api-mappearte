@@ -1,18 +1,20 @@
 const express = require('express')
 const createError = require('http-errors')
 const router = express.Router()
-const streetart = require('../usecases/streetart')
+const streetArt = require('../usecases/streetArt')
 const auth = require('../middlewares/auth')
+
 
 router.get('/', async (req, res) => {
     try {
         const type = req.query.type
         const artistId = req.query.artistId
-        const filteredStreetart = await streetart.getFiltered(type, artistId)
+        console.table(req.query)
+        const filteredStreetArt = await streetArt.getFiltered(type, artistId)
         res.json({
             ok: true,
             data: {
-                streetart: filteredStreetart
+                streetArt: filteredStreetArt
             }
         })
     } catch (error) {
@@ -26,11 +28,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async(req, res) => {
     try {
-        const newStreetart = await streetart.create(req.body)
+        const newStreetArt = await streetArt.create(req.body)
         res.json({
             ok: true,
             data: {
-                streetart: newStreetart
+                streetArt: newStreetArt
             }
         })
     } catch (error) {

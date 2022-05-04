@@ -1,14 +1,16 @@
-const Streetart = require('../models/streetart')
+const mongoose = require('mongoose')
+const StreetArt = require('../models/streetArt')
 
-function create (streetartData) {
-    return Streetart.create(streetartData)
+function create (streetArtData) {
+    return StreetArt.create(streetArtData)
 }
 
 function getFiltered(type, artistId) {
     let filters = {}
     if(type != null) filters.type = type
-    if(type != null) filters.artist = {$in: [artistId]}
-    return Streetart.find(filters)
+    if(artistId != null) filters.artistId = mongoose.Types.ObjectId(artistId)
+
+    return StreetArt.find(filters)
 }
 
 module.exports = {
