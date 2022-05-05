@@ -4,7 +4,7 @@ const cors = require('cors')
 const artistRouter = require('./routes/artist')
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
-const streetArtRouter = require('./routes/streetArt')
+const streetArtRouter = require('./routes/streetart')
 
 const app = express()
 
