@@ -1,6 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const server = require('./src/server')
+const port = process.env.PORT
 
 const {
     db_user,
@@ -17,6 +18,6 @@ mongoose.connect(`mongodb+srv://${db_user}:${db_password}@${db_host}/${db_name}`
     console.error('Error al conectar a la DB: ', error)
 })
 
-server.listen(8080, () => {
+server.listen(port, () => {
     console.log('Mappearte esta listo en http://localhost:8080')
 })
