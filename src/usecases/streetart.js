@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const StreetArt = require('../models/streetArt')
+const StreetArt = require('../models/streetart')
 
 function create (streetArtData) {
     return StreetArt.create(streetArtData)
