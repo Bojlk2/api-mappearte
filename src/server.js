@@ -5,6 +5,7 @@ const artistRouter = require('./routes/artist')
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 const streetArtRouter = require('./routes/streetart')
+const userArtRouter = require('./routes/userart')
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use('/auth', authRouter)
 app.use('/artist', artistRouter)
 app.use('/user', userRouter)
 app.use('/streetart', streetArtRouter)
+app.use('/userart', userArtRouter)
 
 app.get('/', (request, response) => {
     response.json({
