@@ -1,10 +1,14 @@
 const mongoose = require('mongoose')
 
 const streetArtSchema = new mongoose.Schema({
-    type: {
-        type: String,
-        enum: ['sticker', 'mural', 'graffiti'],
-        required: true
+    isMural: {
+        type: Boolean
+    },
+    isGraffiti: {
+        type: Boolean
+    },
+    isSticker: {
+        type: Boolean
     },
     lat: {
         type: String,
